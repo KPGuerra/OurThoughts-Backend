@@ -1,9 +1,9 @@
 class Api::V1::UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create]
+    skip_before_action :authorized
 
     def index
-        @users = User.all.includes(:thoughts)
-        render json: @users
+        users = User.all.includes(:thoughts)
+        render json: users
     end 
 
     def show
@@ -12,13 +12,14 @@ class Api::V1::UsersController < ApplicationController
     end 
 
     def profile
-        render json: {user: UserSerializer.new(current_user)}, status: :accepted
+        render json: {user: current_user}, status: :accepted
     end 
 
     def create
-        @user = User.create(user_params)
+        @user = User.create!(user_params)
+
         if @user.valid?
-            render json: {user: UserSerializer.new(@user) }, status :created
+            render json: {user: UserSerializer.new(@user), jwt: @token}, status: :created
         else 
             render json: { error: 'Failed to create new account' }, status: :not_acceptable
         end
