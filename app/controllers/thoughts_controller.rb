@@ -1,2 +1,0 @@
-class ThoughtsController < ApplicationController
-end
