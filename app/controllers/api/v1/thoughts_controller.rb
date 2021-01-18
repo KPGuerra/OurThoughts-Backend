@@ -22,7 +22,7 @@ class Api::V1::ThoughtsController < ApplicationController
     end 
 
     def destroy
-        @thought = thought.find(params[:id])
+        @thought = Thought.find(params[:id])
         @thought.destroy!
         render json: {}
     end 
