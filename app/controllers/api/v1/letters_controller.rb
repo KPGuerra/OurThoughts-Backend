@@ -29,7 +29,7 @@ class Api::V1::LettersController < ApplicationController
 
     private 
     def letter_params
-        params.require(:letter).permit(:user_id, :thought_id, :content, :like)
+        params.require(:letter).permit(:user_id, :thought_id, :content)
     end
 end
 
