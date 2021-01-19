@@ -26,8 +26,8 @@ class Api::V1::UsersController < ApplicationController
     end 
 
     def update 
-        @user. User.find(params[:id])
-        if (@user.update!(user_params))
+        @user = User.find(params[:id])
+        if @user.update!(user_params)
             render json: @user
         else 
             render json: {errors: @user.errors}
@@ -35,10 +35,9 @@ class Api::V1::UsersController < ApplicationController
     end 
 
     def destroy
-        @all_users = User.all
-        @user = user.find(params[:id])
+        @user = User.find(params[:id])
         @user.destroy
-        render json: @all_users
+        render json: {}
     end 
 
     private 
